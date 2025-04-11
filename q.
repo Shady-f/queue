@@ -1,0 +1,63 @@
+#include<stdio.h>
+#define SIZE 10
+int queue[SIZE];
+int front=-1,rear=-1,i;
+
+void enqueue(int val){
+     
+         if(rear==SIZE-1){
+                printf("Queue is Overflow!\n");
+  	  }
+   	 else
+    	{
+     		  rear++;
+     		  queue[rear]=val;
+    	}
+   }
+void dequeue(){
+    if(front==rear){
+               printf("Queue is Empty! \n");
+     }
+     else
+     {
+     printf("pop %d \n",queue[++front]); 
+     
+     }
+   }
+void display(){
+                if(front==rear){
+                      printf("Queue is Empty! \n");
+                 }
+                      
+                       printf("Queue elements: ");
+                for(i=front+1; i<=rear; i++){
+                       printf("%d ",queue[i]);
+                 } 
+                     printf("\n");
+     }
+int main() {
+ int val,a;
+        do {
+        printf("Enter Choise you want!\n1.enqueue\n2.dequeue\n3.display\n0.Exit\n");
+        scanf("%d",&a);
+			
+ 	        switch (a) {
+ 	                case 1:
+	                       printf("Enter the value: ");
+	                       scanf("%d",&val);
+	                       enqueue(val);
+	                       break;
+	               case 2:
+	                       dequeue();
+	                       break;
+	              case 3:
+	                       display();
+	                       break;
+	             case 0:
+	                       printf("Exit !");
+	                       break;          
+	             default: printf("Wrong choice");
+	           }
+	}while(a!=0);
+	return 0;
+	}
