@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include<string.h>
+#define  LENGTH 10
+#define SIZE 10
+char playlist[SIZE][LENGTH];
+int front = -1, rear = -1;
+char song;
+void add(char song[]) {
+       
+       if ((rear + 1) % SIZE == front) {
+               printf("\nplaylist is full. Cannot insert!\n");
+                     return;
+    }
+   
+    if (front == -1 && rear == -1) {
+               front = rear = 0;
+    } else {
+      
+        rear = (rear + 1) % SIZE;
+    }
+    
+     strcpy(playlist[rear], song);
+     printf("added: %s\n", song);
+}
+
+
+void next() {
+    if (front == -1) {
+        printf("playlist is empty\n");
+        return;
+    }
+    front = (front + 1) % SIZE;
+    printf("Next song is : %s\n", playlist[front]);
+    
+}
+void current() {
+    if (front == -1) {
+        printf("playlist is empty\n");
+        return;
+    }
+    printf("Current song is : %s\n", playlist[front]);
+    
+}
+void del_s() {
+     if (front == -1) {
+        printf("playlist is empty. Cannot delete!\n");
+        return;
+    }
+
+    printf("Deleted : %s\n", playlist[front]);
+     front = (front + 1) % SIZE;
+    }
+    
+    
+void display() {
+    int i;
+    if (front == -1) {
+        printf("playlist is empty\n");
+    } else {
+        printf("playlist is: ");
+        for (i = front; i != rear; i = (i + 1) % SIZE) {
+            printf("%s", playlist[i]);
+        }
+        printf("%s\n", playlist[rear]);
+    }
+    
+}
+int main() {
+    int choice = 0, val;
+    char song;
+    while (choice != 4) {
+        printf("\n---Song Playlist Using  Queue Menu---\n");
+        printf("1. add\n2. next\n3. current\n4. del_s\n0.Exit");
+        printf("Press Button U Want perform: ");
+        scanf("%d", &choice);
+	 getchar(); // To consume the newline left by scanf
+               switch (choice) {  
+               
+                              case 1:
+                                              printf("Song Name: ");
+       	                               fgets(song, LENGTH, stdin);
+                                              add(song);
+                                              song[strcspn(song, "\n")] = 0;
+                                              break;
+                             case 2:
+                                             next();
+                                             break;
+                             case 3:
+                                             current();
+                                             break;
+                            case 4:
+                                            del_s();
+                                            break;
+                            case 0:
+                                            printf("Exiting program...\n");
+                                            break;    
+
+                          default:      printf("Invalid try again.\n");    break;
+            
+        }
+    }
+
+    return 0;
+}
